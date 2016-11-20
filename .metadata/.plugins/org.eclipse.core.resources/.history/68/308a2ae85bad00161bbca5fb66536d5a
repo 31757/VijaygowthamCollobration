@@ -1,0 +1,3 @@
+<%@include file="collaborationhomeheader.jsp" %>
+
+<%@include file="collaborationhomefooter.jsp" %>            

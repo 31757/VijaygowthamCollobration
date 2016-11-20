@@ -1,0 +1,10 @@
+INDEX VERSION 1.3+E:\vanuchat\vanuchat\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+114683941.index
+2713929785.index
+3637813604.index
+4273475162.index
+1394752522.index
+2752402724.index
+2855179467.index
+3891326933.index
+2619411620.index

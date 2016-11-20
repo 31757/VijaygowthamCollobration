@@ -1,0 +1,33 @@
+'use strict';
+
+var App = angular.module("myApp", ["ngRoute"]);
+
+App.config(function($routeProvider,$locationProvider) {
+    $routeProvider
+    .when("/", {
+        templateUrl : "index.html"
+    });
+    $routeProvider
+    .when("/login", {
+        templateUrl : "login.html"        
+    });
+    $routeProvider
+    .when("/about", {
+        templateUrl : "about.html"
+    });
+    $routeProvider
+     .when("/contact", {
+        templateUrl : "contact.html"
+    });
+    $routeProvider
+    .when("/userreg", {
+        templateUrl : "userreg.html"        
+    });
+    $routeProvider
+    .when("/vanuhome", {
+        templateUrl : "vanuchathome.html"        
+    });
+    $locationProvider.html5Mode({
+    	 	  requireBase: false
+    	});
+});

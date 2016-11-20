@@ -1,0 +1,48 @@
+package com.vanuchat.model;
+
+import javax.persistence.*;
+
+@Entity
+public class ForumComments {
+	@Id
+	private int Forumcommentid;
+	@Column
+	private int Forumid;
+	@Column
+	private String username;
+	@Column
+	private String comments;
+
+	public int getForumcommentid() {
+		return Forumcommentid;
+	}
+
+	public void setForumcommentid(int Forumcommentid) {
+		this.Forumcommentid = Forumcommentid;
+	}
+
+	public int getForumid() {
+		return Forumid;
+	}
+
+	public void setForumid(int Forumid) {
+		this.Forumid = Forumid;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getComment() {
+		return comments;
+	}
+
+	public void setComment(String comments) {
+		this.comments = comments;
+	}
+
+}

@@ -1,0 +1,80 @@
+package com.vanuchat.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
+@Entity
+public class Job {
+
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
+	private int Id;
+	private String JobName;
+	private String JobCategory;
+	private String JobSalary;
+	private String JobQuantity;
+	private String JobImage;
+	private String JobDescription;
+	
+	@Transient
+	private MultipartFile JobFile;
+	
+	public MultipartFile getJobFile() {
+		return JobFile;
+	}
+
+	public void setJobFile(MultipartFile JobFile) {
+		JobFile = JobFile;
+	}
+	
+	public int getId() {
+		return Id;
+	}
+	public void setId(int id) {
+		Id = id;
+	}
+	public String getJobName() {
+		return JobName;
+	}
+	public void setJobName(String JobName) {
+		JobName = JobName;
+	}
+	public String getJobCategory() {
+		return JobCategory;
+	}
+	public void setJobCategory(String JobCategory) {
+		JobCategory = JobCategory;
+	}
+	public String getJobSalary() {
+		return JobSalary;
+	}
+	public void setJobPrice(String JobSalary) {
+		JobSalary = JobSalary;
+	}
+	public String getJobQuantity() {
+		return JobQuantity;
+	}
+	public void setJobQuantity(String JobQuantity) {
+		JobQuantity = JobQuantity;
+	}
+	public String getJobImage() {
+		return JobImage;
+	}
+	public void setJobImage(String JobImage) {
+		JobImage = JobImage;
+	}
+	public String getJobDescription() {
+		return JobDescription;
+	}
+	public void setJobDescription(String JobDescription) {
+		JobDescription = JobDescription;
+	}
+	
+	
+}

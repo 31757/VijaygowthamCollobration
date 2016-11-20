@@ -1,0 +1,28 @@
+package com.vanuchat.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.vanuchat.model.Job;
+
+@Repository
+public interface JobDAO {
+
+	@Autowired
+
+	public void insert(Job p);
+
+	public void update(Job p);
+
+	public void delete(int pid);
+
+	public Job getJob(int pid);
+
+	public List<Job> ListJob();
+	
+	public Job getJobWithMaxId();
+
+
+}

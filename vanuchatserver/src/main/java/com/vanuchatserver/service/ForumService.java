@@ -1,0 +1,21 @@
+package com.vanuchatserver.service;
+
+import java.util.List;
+
+
+import com.vanuchatserver.model.*;
+
+public interface ForumService
+{
+	List<Forum> findAll();
+	Forum findById(int id);
+	void create(Forum fourm);
+	void edit(Forum fourm);
+	void deleteById(int id);
+	void postComment(ForumComments comments);
+	List<ForumComments> showcomment(int id);
+	
+	
+
+}
+
