@@ -3,7 +3,7 @@
 #A new way of chatting with people 
 
 
-#Backend is a maven project
+#Backend is a maven project---vanuchatserver
 
 
-#Frontend is a Dynamic web project
+#Frontend is a Dynamic web project---vanufront

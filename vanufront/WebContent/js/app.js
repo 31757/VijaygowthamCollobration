@@ -18,9 +18,30 @@ App.config(function($routeProvider,$locationProvider) {
     .when("/userreg", {
         templateUrl : "userreg.html"        
     })
+    .when("/blog", {
+        templateUrl : "blog.html"        
+    })
+    .when("/addblog", {
+        templateUrl : "addblog.html"        
+    })
+    .when("/updateblog", {
+        templateUrl : "updateblog.html"        
+    })
+    .when("/forum", {
+        templateUrl : "forum.html"        
+    })
+    .when("/addforum", {
+        templateUrl : "addforum.html"        
+    })
+    .when("/updateforum", {
+        templateUrl : "updateforum.html"        
+    })
+    .when("/chat", {
+        templateUrl : "chat.html"        
+    })
     .when("/vanuhome", {
         templateUrl : "vanuchathome.html"        
     });
 
-    
+   
 });

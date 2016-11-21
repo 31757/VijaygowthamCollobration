@@ -1,6 +1,0 @@
-package com.vanuchat.controller;
-
-@Controller
-public class JobController {
-
-}
