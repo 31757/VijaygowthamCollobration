@@ -7,3 +7,14 @@
 
 
 #Frontend is a Dynamic web project---vanufront
+
+
+#Froneend project has been changed into --------Dost Gappa
+
+Changes afe implemented in the templates and designs
+
+Dost-In Hindi->Friends
+
+Gappa-In Marati->Chat
+
+

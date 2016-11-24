@@ -17,15 +17,15 @@ public class LoginController {
 	 UserService userService;
   
 	@RequestMapping(value = "/userlogin", method = RequestMethod.POST)
-   public ResponseEntity<String> Login(@RequestBody UserCredentials user)
+   public ResponseEntity<UserCredentials> Login(@RequestBody UserCredentials user)
    {
        if(userService.check(user.getUsername(),user.getPassword()))
        {
-       	return new ResponseEntity<String>(HttpStatus.FOUND);
+    	  return new ResponseEntity<UserCredentials>(HttpStatus.FOUND);
        }
        else
        {
-       	return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+       	return new ResponseEntity<UserCredentials>(HttpStatus.NOT_FOUND);
        }
    }
 }

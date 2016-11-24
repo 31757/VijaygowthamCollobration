@@ -36,7 +36,7 @@ public class AppConfiguration
 		sessionBuilder.scanPackages("com.vanuchatserver.model");
 		sessionBuilder.setProperty("hibernate.show_sql", "true");
 		sessionBuilder.setProperty("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
-		sessionBuilder.setProperty("hibernate.hbm2ddl.auto", "create");
+		sessionBuilder.setProperty("hibernate.hbm2ddl.auto", "update");
 		return sessionBuilder.buildSessionFactory();
 	}
 	
