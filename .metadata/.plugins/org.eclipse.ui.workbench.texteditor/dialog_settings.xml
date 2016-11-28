@@ -8,22 +8,23 @@
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="user"/>
+			<item value="blog"/>
+			<item value="User"/>
+			<item value="Blog"/>
 			<item value="kola"/>
 			<item value="register"/>
 			<item value="yes"/>
 			<item value="s"/>
-			<item value="style"/>
-			<item value="SCRIPT"/>
-			<item value="STYLE"/>
-			<item value="kolaborasi"/>
 		</list>
 		<list key="replacehistory">
+			<item value="Forum"/>
+			<item value="Blog"/>
 			<item value="VANUCHAT"/>
 			<item value="Job"/>
 			<item value=""/>
 			<item value="forum"/>
 			<item value="VanuChat"/>
-			<item value="Forum"/>
 			<item value="User"/>
 		</list>
 	</section>
@@ -31,7 +32,7 @@
 		<item value="257" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="380" key="DIALOG_HEIGHT"/>
-		<item value="405" key="DIALOG_X_ORIGIN"/>
-		<item value="40" key="DIALOG_Y_ORIGIN"/>
+		<item value="50" key="DIALOG_X_ORIGIN"/>
+		<item value="116" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>
