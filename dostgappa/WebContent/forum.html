@@ -1,0 +1,43 @@
+<!doctype html>
+<!-- Website template by freewebsitetemplates.com -->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOST GAPPA</title>
+<link rel="stylesheet" href="css/style.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/mobile.css">
+<script src="js/mobile.js" type="text/javascript"></script>
+</head>
+<body>
+
+	<div id="body">
+		<div class="header">
+			<div>
+				<h1>Forum</h1>
+			</div>
+		</div>
+		<div>
+			<form>
+				<div ng-controller="ForumControl as ctrl">
+					<ul style="list-style-type: georgian;" >
+						<li>
+							<div   class="footer" ng-repeat="c in ctrl.forums" style="border-color: blue; border-style: solid;border-width:2; width: 700px; margin-left: 200px;">
+								<p><span style="text-align: center; font-size:large;" ng-bind="c.forumtopic"></span></p>
+								<span style="text-align:justify;" ng-bind="c.forumsubtopic"></span>
+															
+							</div>	
+						</li>					
+					</ul>
+				</div>
+				
+			</form>
+			
+		</div>
+
+	</div>
+	<script src="js/app.js"></script>
+	<script src="js/service/forum_service.js"></script>
+	<script src="js/controller/forum_controller.js"></script>
+</body>
+</html>

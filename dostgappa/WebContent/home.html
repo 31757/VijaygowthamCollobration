@@ -5,51 +5,48 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DOST GAPPA</title>
-
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <link rel="stylesheet" type="text/css" href="css/mobile.css">
 <script src="js/mobile.js" type="text/javascript"></script>
-<!-- CUSTOM STYLE -->
-<link
-	href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800&subset=latin,latin-ext'
-	rel='stylesheet' type='text/css'>
-<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="js/jquery-ui.min.js"></script>
-<style>
-#lolo {
-	position: absolute; bottom : 0;
-	width: 100%;
-	height: 115px;
-	bottom: 0
-	margin: 0 auto;
-}
-</style>
+<base href="/dostgappa/">
 </head>
 <body ng-app="myApp">
-	<div id="lolo">
-		<div id="page" style="">
-			<div id="header">
+
+<div id="body">
+				<div class="header" style="margin-right: relative;background-color:lightblue ">
 				<div>
-					<ul id="navigation">
-
-						<li class="menu"><a href="#blog">Blog</a>
-							<ul class="secondary">
-								<li><a href="#postblog">Post Blog</a> <a href="#updateblog">Update
-										Blog</a></li>
-							</ul></li>
-						<li class="menu"><a href="#forum">Forum</a>
-							<ul class="secondary">
-								<li><a href="#postforum">Post Forum</a> <a
-									href="#updateforum">Update Forum</a></li>
-							</ul></li>
-						<li><a href="#chat">Chat</a></li>
+					<ul>
+						<li>
+							<a href="#chat" ><h1>Chat</h1></a>
+							
+						</li>
+						<li>
+							<a href="#blog" ><h1>View Blogs</h1></a>
+							
+						</li>
+						<li>
+							<a href="#postblog" ><h1>Post Blog</h1></a>
+							
+						</li>
+						
+						<li>
+							<a href="#forum" ><h1>Forum</h1></a>
+							
+						</li>
 					</ul>
-
 				</div>
-
+				
 			</div>
+			
 		</div>
-	</div>
-
+	<script src="js/angular.min.js"></script>
+	<script src="js/angular-route.js"></script>
+	<script src="js/jquery-1.10.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/service/user_service.js"></script>
+	<script src="js/controller/user_controller.js"></script>
+	<script src="js/service/blog_service.js"></script>
+	<script src="js/controller/blog_controller.js"></script>
 </body>
 </html>

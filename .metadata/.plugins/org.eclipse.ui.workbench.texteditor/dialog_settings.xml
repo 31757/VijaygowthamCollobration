@@ -8,22 +8,22 @@
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="user"/>
 			<item value="blog"/>
+			<item value="header"/>
+			<item value="user"/>
 			<item value="User"/>
 			<item value="Blog"/>
 			<item value="kola"/>
 			<item value="register"/>
 			<item value="yes"/>
-			<item value="s"/>
 		</list>
 		<list key="replacehistory">
+			<item value="forum"/>
 			<item value="Forum"/>
 			<item value="Blog"/>
 			<item value="VANUCHAT"/>
 			<item value="Job"/>
 			<item value=""/>
-			<item value="forum"/>
 			<item value="VanuChat"/>
 			<item value="User"/>
 		</list>

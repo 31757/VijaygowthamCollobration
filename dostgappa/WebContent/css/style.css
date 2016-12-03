@@ -11,6 +11,13 @@ body #page {
 	padding: 0;
 	width: auto;
 }
+lolo {
+	margin: 20px;
+	padding: 0;
+	position: relative;
+	width: auto;
+}
+
 a {
 	text-decoration: none;
 	outline: none;

@@ -22,6 +22,9 @@ App.config(function($routeProvider,$locationProvider) {
     .when("/blog", {
         templateUrl : "blog.html"        
     })
+    .when("/forum", {
+        templateUrl : "forum.html"        
+    })
     .when("/singlepost", {
         templateUrl : "singlepost.html"        
     })

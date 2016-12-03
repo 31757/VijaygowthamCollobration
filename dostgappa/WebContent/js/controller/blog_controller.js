@@ -10,12 +10,12 @@ angular.module('myApp').controller(
 				function($scope, BlogService, $location, $window) {
 					var self = this;
 					self.blog = {
-						blogid : '',
-						username : '',
-						blogtitle : '',
-						blogpostcontent : '',
-						tags : '',
-						Dateofcreation : ''
+						blogid: '',
+						userid: '',
+						blogtitle: '',
+						blogpostcontent: '',
+						tags: '',
+						date: ''
 					};
 					self.blogcomm = {
 						blogcommentid : '',
@@ -23,7 +23,7 @@ angular.module('myApp').controller(
 						username : '',
 						comments : ''
 					};
-					self.blog = [];
+					self.blogs = [];
 					self.blogcomm = [];
 
 					self.submit = submit;
@@ -31,10 +31,12 @@ angular.module('myApp').controller(
 					self.remove = remove;
 					self.reset = reset;
 					self.login = login;
+					
+					fetchAllBlog();
 
 					function fetchAllBlog() {
 						BlogService.fetchAllBlog().then(function(d) {
-							self.blog = d;
+							self.blogs = d;
 						}, function(errResponse) {
 							console.error('Error while fetching Blogs');
 						});
@@ -64,7 +66,8 @@ angular.module('myApp').controller(
 								});
 					}
 
-					function submit() {
+					function submit() 
+					{
 						createBlog(self.blog);
 
 					}
