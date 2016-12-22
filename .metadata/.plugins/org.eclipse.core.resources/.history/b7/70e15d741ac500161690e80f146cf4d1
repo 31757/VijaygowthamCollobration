@@ -1,0 +1,189 @@
+'use strict';
+
+angular.module('myApp').controller(
+		'BlogControl',
+		[
+				'$scope',
+				'BlogService',
+				'$location',
+				'$window',
+				'bid',
+				function($scope, BlogService, $location, $window,bid) {
+				 var id;
+				 var self = this;
+					self.blog = {
+						blogid: '',
+						userid: '',
+						blogtitle: '',
+						blogpostcontent: '',
+						tags: '',
+						date: ''
+					};
+					self.blog1 = {
+							blogid: '',
+							userid: '',
+							blogtitle: '',
+							blogpostcontent: '',
+							tags: '',
+							date: ''
+						};
+					self.blogcomm = {
+						blogcommentid : '',
+						blogid : '',
+						username : '',
+						comments : ''
+					};
+					
+					self.blogs = [];
+					self.blog1 = [];
+					self.blogcomm = [];
+					
+					self.submit = submit;
+					self.submitcomm = submitcomm;
+					self.check =  check;
+					self.remove = remove;
+					self.reset = reset;
+					self.login = login;
+					
+					fetchAllBlog();
+					fetchAllBlogComments(bid.id);
+					fetchOneBlog(bid.id);
+					
+					
+
+					function fetchAllBlog()
+					{
+						BlogService.fetchAllBlog().then(function(d) 
+						{
+							self.blogs = d;
+						}, 
+						function(errResponse)
+						{
+							//console.error('Error while fetching Blogs');
+						});
+					}
+					
+					function fetchAllBlogComments(id)
+					{
+						BlogService.fetchAllBlogComments(id).then(function(d) 
+						{
+							self.blogcomm = d;
+							console.log(self.blogcomm);
+							
+						}, 
+						function(errResponse)
+						{
+							//console.error('Error while fetching Blogs');
+						});
+					}
+					
+					function fetchOneBlog(id)
+					{
+						BlogService.fetchOneBlog(id).then(function(d) 
+						{
+							self.blog1 = d;
+							console.log(self.blog1);
+						}, 
+						function(errResponse)
+						{
+						//	console.error('Error while fetching Blogs');
+						});
+					}
+					
+					function createBlog(blog)
+					{
+						BlogService.createBlog(blog).then(function(response) {
+							$window.alert("BLOG POSTED");
+							var url = "http://localhost:9050/dostgappa/#/blog";
+							$window.location.href = url;
+						}, function(errResponse) {
+							$window.alert("The Blog Already Exists");
+						});
+					}
+					
+					function postBlogcomm(blogcomm1,id)
+					{
+						
+						$window.alert("lol"+id);
+						BlogService.postblogComments(blogcomm1,id).then(function(response) {
+							$window.alert("COMMENT POSTED");
+							var url = "http://localhost:9050/dostgappa/#/blogcomment";
+							$window.location.href = url;
+							bid.id=id;
+						}, function(errResponse) 
+						{
+							$window.alert("The Comment Already Exists");
+						});
+					}
+				
+					function updateBlog(blog, id) {
+						BlogService.updateBlog(blog, id).then(fetchAllBlog,
+								function(errResponse) {
+									console.error('Error while updating Blog');
+								});
+					}
+
+					function deleteBlog(id) {
+						BlogService.deleteBlog(id).then(fetchAllBlog,
+								function(errResponse) {
+									console.error('Error while deleting Blog');
+								});
+					}
+
+					function submit() 
+					{
+						createBlog(self.blog);
+					}
+					function submitcomm() 
+					{
+						
+						postBlogcomm(self.blogcomm1, bid.id);
+						
+					}
+					function login()
+					{
+						loginblog(self.blog);
+					}
+					function check(id) 
+					{
+						console.log('id to be edited', id);
+						bid.id=id;
+						console.log(self.blogs.length);
+						for (var i = 0; i < self.blogs.length; i++)
+						{
+							console.log('welcome123');
+							if (self.blogs[i].blogid == id)
+							{
+								console.log('welcome');
+								self.blog1 = angular.copy(self.blogs[i]);
+								break;
+							}
+						}
+						console.log(self.blog1);
+						$window.alert("redirecting to comment");
+						var url = "http://localhost:9050/dostgappa/#/comments";
+						$window.location.href = url;
+					}
+
+					function remove(id) {
+						console.log('id to be deleted', id);
+						if (self.blog.id === id)
+						{
+							reset();
+						}
+						deleteBlog(id);
+					}
+
+					function reset() {
+						self.blog = {
+							blogid : null,
+							username : '',
+							blogtitle : '',
+							blogpostcontent : '',
+							tags : '',
+							Dateofcreation : ''
+						};
+						$scope.myForm.$setPristine(); // reset Form
+					}
+
+				} ]);

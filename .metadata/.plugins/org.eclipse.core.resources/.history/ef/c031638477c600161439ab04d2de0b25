@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>DOSTGAPPA</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link href="css/bootstrap.css" rel="stylesheet" />
+<link href="css/style.css" rel="stylesheet" />
+<link href="font/css/fontello.css" rel="stylesheet" />
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700'
+	rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div id="header">
+		<div style="background-color: aqua;">
+			<ul id="navigation">
+				<li class="selected"><a href="#blog">BLOG</a></li>
+				<li class="selected"><a href="#addblog">ADD BLOG</a></li>
+				<li class="selected"><a href="#forum">FOURM</a></li>
+				<li class="selected"><a href="/spring-mvc-chat" target="_blank">CHAT</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="body" style="background-image: url('http://365psd.com/images/previews/178/abstract-background-for-design-vector-graphic-3993.jpg');">
+		<div class="header">
+			<div>
+				<h1>Add a Forum here</h1>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<br />
+		<br />
+		<div ng-controller='myCtrl'>
+     <h2>Demo</h3>
+    <div>
+        <div>
+            <angular-star-rating max="maxValue" value='ratingValue'  hover='changeOnHover' is-readonly='isReadonly'></angular-star-rating>
+        </div>
+        <div>
+            <p>Readonly:
+                <input type='checkbox' ng-model='isReadonly' /> {{isReadonly}}
+            </p>
+            <p>Rating value change on mouse hover: 
+                <input type='checkbox' ng-model='changeOnHover' /> {{changeOnHover}}
+            </p>
+            <p>Your rating value: {{ratingValue}} / {{maxValue}}</p>
+            <p>Max value: 
+                <input ng-model="maxValue" type="number" min="5" max="100"> (5~100 for test)
+             </p>
+        </div>
+    </div>
+</div>
+	</div>
+	<script src="js/service/forum_service.js"></script>
+	<script src="js/controller/forum_controller.js"></script>
+</body>
+</html>

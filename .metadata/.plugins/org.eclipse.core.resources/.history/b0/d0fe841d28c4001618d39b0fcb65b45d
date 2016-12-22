@@ -1,0 +1,96 @@
+<!doctype html>
+<!-- Website template by freewebsitetemplates.com -->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>singlepost - Frozen Yogurt Shop</title>
+<link rel="stylesheet" href="css/style.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/mobile.css">
+<script src="js/mobile.js" type="text/javascript"></script>
+</head>
+<body ng-app="myApp">
+	<div id="header">
+		<div style="background-color: aqua;">
+			<ul id="navigation">
+				<li class="selected"><a href="#blog">BLOG</a></li>
+				<li class="selected"><a href="#addblog">ADD BLOG</a></li>
+				<li class="selected"><a href="#forum">FOURM</a></li>
+				<li class="selected"><a href="#chat">CHAT</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="body">
+		<div class="header">
+			<div>
+				<h1>Blog</h1>
+			</div>
+		</div>
+		<div>
+			<form>
+				<div ng-controller="BlogControl as ctrl">
+					<div class="footer" style="border-color: blue; border-style: solid; border-width: 2; width: 700px; margin-left: 200px;">						
+					<p>
+							<span style="text-align: center; font-size: large;"
+								ng-bind="ctrl.blog1.blogtitle"></span>
+						</p>
+						<span style="text-align: justify;" ng-bind="ctrl.blog1.blogpostcontent"></span>
+						<p>
+							USER NAME:<span style="text-align: left;" ng-bind="ctrl.blog1.username"></span>
+						</p>
+						<p>
+							Date: <span style="text-align: right;" ng-bind="ctrl.blog1.date"></span>
+						</p>						
+					</div>
+				</div>
+			</form>
+			
+			<div ng-controller="BlogControl as ctrl" style="border-color: blue; border-style: solid; border-width: 2; width: 700px; margin-left: 200px;">
+			<h3>Comments</h3>
+					<ul style="list-style-type: georgian;">
+						<li>
+							<div class="footer" ng-repeat="c in ctrl.blogscomm"
+								style="border-color: blue; border-style: solid; border-width: 2; width: 700px; margin-left: 200px;">
+							<form ng-submit="ctrl.check(c.blogid)" method="post">
+								<p>
+									<span style="text-align: center; font-size: large;" ng-bind="c.comments"></span>
+								</p>
+								
+							</form>	 
+							</div>
+						</li>
+					</ul>
+				</div>
+				
+				<div ng-controller="BlogControl as ctrl" style="border-color: blue; border-style: solid; border-width: 2; width: 700px; margin-left: 200px;">
+			<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal"
+				method="post">
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label class="col-md-2 control-lable" for="file">Comment Here</label>
+						<div class="col-md-7">
+							<input type="text" ng-model="ctrl.blogcomm.comments"
+								name="blogtitle" class="username form-control input-sm"
+								placeholder="Enter the Blog Comments" required ng-minlength="3" />
+						</div>
+						<div class="has-error" ng-show="myForm.$dirty">
+							<span ng-show="myForm.blogtitle.$error.required">This is
+								a required field</span> <span ng-show="myForm.uname.$error.minlength">Minimum
+								length required is 3</span> <span ng-show="myForm.blogtitle.$invalid">This
+								field is invalid </span>
+						</div>
+										
+						<input type="submit" value="Post" class="btn btn-primary btn-sm"
+							ng-disabled="myForm.$invalid">
+						<button type="button" ng-click="ctrl.reset()"
+							class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset</button>
+					
+				</div>
+				</div>
+		</div>
+	</div>
+	<script src="js/app.js"></script>
+	<script src="js/service/blog_service.js"></script>
+	<script src="js/controller/blog_controller.js"></script>
+</body>
+</html>

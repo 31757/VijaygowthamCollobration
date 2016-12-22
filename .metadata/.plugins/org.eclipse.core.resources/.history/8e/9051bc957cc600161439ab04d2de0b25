@@ -1,0 +1,5 @@
+package com.vanuchatserver.model;
+
+public class ForumRating {
+
+}

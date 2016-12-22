@@ -1,0 +1,134 @@
+package com.vanuchatserver.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import com.vanuchatserver.model.Forum;
+import com.vanuchatserver.model.ForumComments;
+import com.vanuchatserver.model.ForumRating;
+import com.vanuchatserver.service.ForumService;
+
+
+
+@RestController
+public class ForumController
+{
+	@Autowired
+	 ForumService fs;
+	     
+	    //-------------------Retrieve All Fourm--------------------------------------------------------
+	    @RequestMapping(value = "/fourm", method = RequestMethod.GET)
+	    public ResponseEntity<List<Forum>> listAllBlogs() 
+	    {
+	        List<Forum> fourm = fs.findAll();
+	        if(fourm.isEmpty())
+	        {
+	            return new ResponseEntity<List<Forum>>(HttpStatus.NOT_FOUND);//You many decide to return HttpStatus.NOT_FOUND
+	        }
+	        return new ResponseEntity<List<Forum>>(fourm, HttpStatus.OK);
+	    }
+	    
+	  
+	  //-------------------Create a Fourm--------------------------------------------------------
+	    @RequestMapping(value = "/fourm", method = RequestMethod.POST)
+	    public ResponseEntity<Void> createBlog(@RequestBody Forum fourm,    UriComponentsBuilder ucBuilder)
+	    {
+	    	fs.create(fourm);
+	        HttpHeaders headers = new HttpHeaders();
+	        headers.setLocation(ucBuilder.path("/fourm/{id}").buildAndExpand(fourm.getForumid()).toUri());
+	        return new ResponseEntity<Void>(HttpStatus.CREATED);
+	    }
+	    
+	    //------------------- Update a Fourm --------------------------------------------------------
+	    @RequestMapping(value = "/fourm/{id}", method = RequestMethod.POST)
+	    public ResponseEntity<Forum> updateBlog(@PathVariable("id") int id, @RequestBody Forum  fourm)
+	    {
+	    	Forum existingpost = fs.findById(id);
+	        if (existingpost == null) 
+	        {
+	            System.out.println("post not found");
+	            return new ResponseEntity<Forum>(HttpStatus.NOT_FOUND);
+	        }
+	        else
+	        {
+	        	existingpost.setForumsubtopic(fourm.getForumsubtopic());
+	        	fs.edit(existingpost);
+	        	return new ResponseEntity<Forum>(HttpStatus.OK);
+	        }
+	    }
+	    
+	    //------------------- Delete a Fourm --------------------------------------------------------
+	    @RequestMapping(value = "/fourm/{id}", method = RequestMethod.DELETE)
+	    public ResponseEntity<Forum> deleteBlog(@PathVariable("id") int id) {
+	      
+	    	Forum existingpost = fs.findById(id);
+	        if (existingpost == null) 
+	        {
+	            System.out.println("post not found");
+	            return new ResponseEntity<Forum>(HttpStatus.NOT_FOUND);
+	        }
+	        else
+	        {
+	        	fs.deleteById(existingpost.getForumid());
+	        	return new ResponseEntity<Forum>(HttpStatus.OK);
+	        }
+	    }
+	    
+	  //------------------- Comment a Fourm --------------------------------------------------------
+	    @RequestMapping(value = "/fourmcomment/{id}", method = RequestMethod.POST)
+	    public ResponseEntity<Forum> commentBlog(@PathVariable("id") int id, @RequestBody ForumComments  comment)
+	    {
+	    	Forum existingpost = fs.findById(id);
+	        if (existingpost == null) 
+	        {
+	            System.out.println("post not found");
+	            return new ResponseEntity<Forum>(HttpStatus.NOT_FOUND);
+	        }
+	        else
+	        {
+	        	comment.setforumid(existingpost.getForumid());
+	        	fs.postComment(comment);
+	        	return new ResponseEntity<Forum>(HttpStatus.OK);
+	        }
+	    }
+	    
+	  //-------------------Retrieve All comments--------------------------------------------------------
+	    @RequestMapping(value = "/fourmcomment/{id}", method = RequestMethod.GET)
+	    public ResponseEntity<List<ForumComments>> listAllComments(@PathVariable("id") int id) 
+	    {
+	        List<ForumComments> comment = fs.showcomment(id);
+	        if(comment.isEmpty())
+	        {
+	            return new ResponseEntity<List<ForumComments>>(HttpStatus.NOT_FOUND);//You many decide to return HttpStatus.NOT_FOUND
+	        }
+	        return new ResponseEntity<List<ForumComments>>(comment, HttpStatus.OK);
+	    }
+	    
+	    //------------------- Rate a Fourm --------------------------------------------------------
+	    @RequestMapping(value = "/fourmrate/{id}", method = RequestMethod.POST)
+	    public ResponseEntity<Forum> rateBlog(@PathVariable("id") int id, @RequestBody ForumRating  rate)
+	    {
+	    	Forum existingpost = fs.findById(id);
+	        if (existingpost == null) 
+	        {
+	            System.out.println("post not found");
+	            return new ResponseEntity<Forum>(HttpStatus.NOT_FOUND);
+	        }
+	        else
+	        {
+	        	comment.setforumid(existingpost.getForumid());
+	        	fs.postComment(comment);
+	        	return new ResponseEntity<Forum>(HttpStatus.OK);
+	        }
+	    }
+}

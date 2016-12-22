@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>DOSTGAPPA</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link href="css/bootstrap.css" rel="stylesheet" />
+<link href="css/style.css" rel="stylesheet" />
+<link href="font/css/fontello.css" rel="stylesheet" />
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700'
+	rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div id="header">
+		<div style="background-color: aqua;">
+			<ul id="navigation">
+				<li class="selected"><a href="#blog">BLOG</a></li>
+				<li class="selected"><a href="#addblog">ADD BLOG</a></li>
+				<li class="selected"><a href="#forum">FOURM</a></li>
+				<li class="selected"><a href="/spring-mvc-chat">CHAT</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="body">
+		<div class="header">
+			<div>
+				<h1>Add a Forum here</h1>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<br />
+		<br />
+		<div ng-app="myApp2" class="footer"
+			ng-controller="ForumControl as ctrl">
+			<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal"
+				method="post">
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label class="col-md-2 control-lable" for="file">Forum
+							Topic</label>
+						<div class="col-md-7">
+							<input type="text" ng-model="ctrl.forum.forumtopic"
+								name="forumtopic" class="username form-control input-sm"
+								placeholder="Enter the Forum Topic" required ng-minlength="3" />
+						</div>
+						<div class="has-error" ng-show="myForm.$dirty">
+							<span ng-show="myForm.forumtopic.$error.required">This is
+								a required field</span> <span ng-show="myForm.uname.$error.minlength">Minimum
+								length required is 3</span> <span ng-show="myForm.forumtopic.$invalid">This
+								field is invalid </span>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label class="col-md-2 control-lable" for="file">Forum sub
+							Topic</label>
+						<div class="col-md-7">
+							<input type="text" ng-model="ctrl.forum.forumsubtopic"
+								name="forumsubtopic" class="username form-control input-sm"
+								placeholder="Enter the Forum Sub Topic" required
+								ng-minlength="3" />
+						</div>
+						<div class="has-error" ng-show="myForm.$dirty">
+							<span ng-show="myForm.forumsubtopic.$error.required">This
+								is a required field</span> <span
+								ng-show="myForm.forumsubtopic.$error.minlength">Minimum
+								length required is 3</span> <span
+								ng-show="myForm.forumsubtopic.$invalid">This field is
+								invalid </span>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label class="col-md-2 control-lable" for="file">Forum Id
+				</label>
+						<div class="col-md-7">
+							<input type="text" ng-model="ctrl.forum.forumid"
+								name="forumid" class="username form-control input-sm"
+								placeholder="Enter the Forum id" required
+								ng-minlength="3" />
+						</div>
+						<div class="has-error" ng-show="myForm.$dirty">
+							<span ng-show="myForm.forumid.$error.required">This
+								is a required field</span> <span
+								ng-show="myForm.forumid.$error.minlength">Minimum
+								length required is 3</span> <span
+								ng-show="myForm.forumid.$invalid">This field is
+								invalid </span>
+						</div>
+					</div>
+				</div>
+
+
+				
+
+
+
+
+					<br /> <br />
+					<div class="row">
+						<input type="submit" value="Post" class="btn btn-primary btn-sm"
+							ng-disabled="myForm.$invalid">
+						<button type="button" ng-click="ctrl.reset()"
+							class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset</button>
+					</div>
+			</form>
+		</div>
+	</div>
+	<script src="js/service/forum_service.js"></script>
+	<script src="js/controller/forum_controller.js"></script>
+</body>
+</html>

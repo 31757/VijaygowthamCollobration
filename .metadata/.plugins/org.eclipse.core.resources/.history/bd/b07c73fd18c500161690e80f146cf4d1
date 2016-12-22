@@ -1,0 +1,148 @@
+package com.vanuchatserver.controller;
+
+import java.util.Date;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import com.vanuchatserver.model.*;
+import com.vanuchatserver.service.*;
+
+
+
+@RestController
+public class BlogPostController 
+{
+	 @Autowired
+	 BlogPostService bps;
+	     
+	    //-------------------Retrieve All Blogs--------------------------------------------------------
+	    @RequestMapping(value = "/blogs", method = RequestMethod.GET)
+	    public ResponseEntity<List<Blog>> listAllBlogs() 
+	    {
+	        List<Blog> blog = bps.findAll();
+	        if(blog.isEmpty())
+	        {
+	            return new ResponseEntity<List<Blog>>(HttpStatus.NOT_FOUND);//You many decide to return HttpStatus.NOT_FOUND
+	        }
+	        return new ResponseEntity<List<Blog>>(blog, HttpStatus.OK);
+	    }
+	    
+	  //-------------------Retrieve top 5 Blogs--------------------------------------------------------
+	    @RequestMapping(value = "/blog", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	    public ResponseEntity<List<Blog>> list5Blogs() 
+	    {
+	    	List<Blog> blog = bps.findLatest5();
+	        if(blog.isEmpty())
+	        {
+	            return new ResponseEntity<List<Blog>>(HttpStatus.NOT_FOUND);//You many decide to return HttpStatus.NOT_FOUND
+	        }
+	        return new ResponseEntity<List<Blog>>(blog, HttpStatus.OK);
+	    }
+	    //--------------------------------------- get one blog----------------------------------//	    
+	    @RequestMapping(value = "/blog/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	    public ResponseEntity<Blog> fetchBlog(@PathVariable("id") int id) 
+	    {
+	    	Blog blog = bps.findById(id);
+	    	System.out.println(blog.getBlogid());
+	        if(blog.getBlogid()!=id)
+	        {
+	        	System.out.println("inside"+blog.getBlogid());
+	            return new ResponseEntity<Blog>(HttpStatus.NOT_FOUND);//You many decide to return HttpStatus.NOT_FOUND
+	        }
+	        System.out.println(blog.getBlogid());
+	        return new ResponseEntity<Blog>(blog,HttpStatus.OK);
+	    }
+	    
+	  //-------------------Create a Blog--------------------------------------------------------
+	    @RequestMapping(value = "/blog", method = RequestMethod.POST)
+	    public ResponseEntity<Void> createBlog(@RequestBody Blog post,    UriComponentsBuilder ucBuilder)
+	    {
+	           	Date d=new Date();
+	           	post.setDate(d);
+	    		bps.create(post);
+	        	HttpHeaders headers = new HttpHeaders();
+	        	headers.setLocation(ucBuilder.path("/blog/{id}").buildAndExpand(post.getBlogid()).toUri());
+	        	return new ResponseEntity<Void>(HttpStatus.CREATED);	       
+	    }
+	    
+	    //------------------- Update a Blog --------------------------------------------------------
+	    @RequestMapping(value = "/blog/{id}", method = RequestMethod.POST)
+	    public ResponseEntity<Blog> updateBlog(@PathVariable("id") int id, @RequestBody Blog  post)
+	    {
+	    	Blog existingpost = bps.findById(id);
+	        if (existingpost == null) 
+	        {
+	            System.out.println("post not found");
+	            return new ResponseEntity<Blog>(HttpStatus.NOT_FOUND);
+	        }
+	        else
+	        {
+	        	existingpost.setBlogpostcontent(post.getBlogpostcontent());
+	        	Date d=new Date();
+	        	existingpost.setDate(d);
+	        	bps.edit(existingpost);
+	        	return new ResponseEntity<Blog>(HttpStatus.OK);
+	        }
+	    }
+	    
+	    //------------------- Delete a Blog --------------------------------------------------------
+	    @RequestMapping(value = "/blog/{id}", method = RequestMethod.DELETE)
+	    public ResponseEntity<Blog> deleteBlog(@PathVariable("id") int id) {
+	      
+	    	Blog existingpost = bps.findById(id);
+	        if (existingpost == null) 
+	        {
+	            System.out.println("post not found");
+	            return new ResponseEntity<Blog>(HttpStatus.NOT_FOUND);
+	        }
+	        else
+	        {
+	        	bps.deleteById(id);
+	        	return new ResponseEntity<Blog>(HttpStatus.OK);
+	        }
+	    }
+	    
+	  //------------------- Comment a Blog --------------------------------------------------------
+	    @RequestMapping(value = "/blogcomment/{id}", method = RequestMethod.POST)
+	    public ResponseEntity<Void> commentBlog(@PathVariable("id") int id, @RequestBody BlogComments  comments)
+	    {
+	    	 System.out.println(id);
+	    	 System.out.println(comments);
+	    	Blog existingpost = bps.findById(id);
+	    	// System.out.println(existingpost.getBlogid());
+	        if (existingpost == null) 
+	        {
+	            System.out.println("post not found");
+	            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+	        }
+	        else
+	        {
+	        	System.out.println("done dana done");
+	        	comments.setBlogid(existingpost.getBlogid());
+	        	bps.postComment(comments);
+	        	return new ResponseEntity<Void>(HttpStatus.OK);
+	        }
+	    }
+	    
+	  //-------------------Retrieve All comments--------------------------------------------------------
+	    @RequestMapping(value = "/blogcomment/{id}", method = RequestMethod.GET)
+	    public ResponseEntity<List<BlogComments>> listAllComments(@PathVariable("id") int id) 
+	    {
+	        List<BlogComments> comments = bps.showcomment(id);
+	        if(comments.isEmpty())
+	        {
+	            return new ResponseEntity<List<BlogComments>>(HttpStatus.NOT_FOUND);//You many decide to return HttpStatus.NOT_FOUND
+	        }
+	        return new ResponseEntity<List<BlogComments>>(comments, HttpStatus.OK);
+	    }
+}

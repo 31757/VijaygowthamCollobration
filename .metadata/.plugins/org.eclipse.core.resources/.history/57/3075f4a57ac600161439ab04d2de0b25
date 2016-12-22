@@ -1,0 +1,21 @@
+package com.vanuchatserver.model;
+
+public class ForumRating {
+	
+	
+	private int frateid;
+	public int getFrateid() {
+		return frateid;
+	}
+	public void setFrateid(int frateid) {
+		this.frateid = frateid;
+	}
+	public int getFrating() {
+		return frating;
+	}
+	public void setFrating(int frating) {
+		this.frating = frating;
+	}
+	private int frating;
+
+}
