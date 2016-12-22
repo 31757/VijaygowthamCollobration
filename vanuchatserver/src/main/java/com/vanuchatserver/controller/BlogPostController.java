@@ -48,6 +48,20 @@ public class BlogPostController
 	        }
 	        return new ResponseEntity<List<Blog>>(blog, HttpStatus.OK);
 	    }
+	    //--------------------------------------- get one blog----------------------------------//	    
+	    @RequestMapping(value = "/blog/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	    public ResponseEntity<Blog> fetchBlog(@PathVariable("id") int id) 
+	    {
+	    	Blog blog = bps.findById(id);
+	    	System.out.println(blog.getBlogid());
+	        if(blog.getBlogid()!=id)
+	        {
+	        	System.out.println("inside"+blog.getBlogid());
+	            return new ResponseEntity<Blog>(HttpStatus.NOT_FOUND);//You many decide to return HttpStatus.NOT_FOUND
+	        }
+	        System.out.println(blog.getBlogid());
+	        return new ResponseEntity<Blog>(blog,HttpStatus.OK);
+	    }
 	    
 	  //-------------------Create a Blog--------------------------------------------------------
 	    @RequestMapping(value = "/blog", method = RequestMethod.POST)
@@ -99,20 +113,26 @@ public class BlogPostController
 	    }
 	    
 	  //------------------- Comment a Blog --------------------------------------------------------
-	    @RequestMapping(value = "/blogcomment/{id}", method = RequestMethod.POST)
-	    public ResponseEntity<Blog> commentBlog(@PathVariable("id") int id, @RequestBody BlogComments  comment)
+	    @RequestMapping(value = "/blogcomment/{id}/{comments}", method = RequestMethod.POST)
+	    public ResponseEntity<Void> commentBlog(@PathVariable("comments") String comments,@PathVariable("id") int id)
 	    {
+	    	 System.out.println(id);
+	    	 System.out.println(comments);
 	    	Blog existingpost = bps.findById(id);
+	    	// System.out.println(existingpost.getBlogid());
 	        if (existingpost == null) 
 	        {
 	            System.out.println("post not found");
-	            return new ResponseEntity<Blog>(HttpStatus.NOT_FOUND);
+	            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	        }
 	        else
 	        {
-	        	comment.setBlogid(existingpost.getBlogid());
-	        	bps.postComment(comment);
-	        	return new ResponseEntity<Blog>(HttpStatus.OK);
+	        	System.out.println("done dana done");
+	        	BlogComments comm=new BlogComments();
+	        	comm.setBlogid(existingpost.getBlogid());
+	        	comm.setComment(comments);
+	        	bps.postComment(comm);
+	        	return new ResponseEntity<Void>(HttpStatus.OK);
 	        }
 	    }
 	    
@@ -120,11 +140,11 @@ public class BlogPostController
 	    @RequestMapping(value = "/blogcomment/{id}", method = RequestMethod.GET)
 	    public ResponseEntity<List<BlogComments>> listAllComments(@PathVariable("id") int id) 
 	    {
-	        List<BlogComments> comment = bps.showcomment(id);
-	        if(comment.isEmpty())
+	        List<BlogComments> comments = bps.showcomment(id);
+	        if(comments.isEmpty())
 	        {
 	            return new ResponseEntity<List<BlogComments>>(HttpStatus.NOT_FOUND);//You many decide to return HttpStatus.NOT_FOUND
 	        }
-	        return new ResponseEntity<List<BlogComments>>(comment, HttpStatus.OK);
+	        return new ResponseEntity<List<BlogComments>>(comments, HttpStatus.OK);
 	    }
 }

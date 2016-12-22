@@ -1,11 +1,15 @@
 'use strict';
 
 var App = angular.module("myApp", ["ngRoute"]);
-
+	App.value('bid',{id:123});
+	
 App.config(function($routeProvider,$locationProvider) {
     $routeProvider
     .when("#/", {
         templateUrl : "index.html"
+    })
+    .when("/temp", {
+        templateUrl : "temp.html"
     })
     .when("/login", {
         templateUrl : "login.html"        
@@ -22,20 +26,21 @@ App.config(function($routeProvider,$locationProvider) {
     .when("/blog", {
         templateUrl : "blog.html"        
     })
+    .when("/openModal", {
+        templateUrl : "#openModal"        
+    })
     .when("/forum", {
         templateUrl : "forum.html"        
     })
-    .when("/singlepost", {
+    .when("/comments", {
         templateUrl : "singlepost.html"        
     })
-    .when("/readpost", {
-        templateUrl : "readpost.html"        
+    .when("/addblog", {
+        templateUrl : "addblog.html"        
     })
-    .when("/secondpost", {
-        templateUrl : "secondpost.html"        
-    })
-    .when("/dghome", {
-        templateUrl : "home.html"        
+   
+    .when("/addforum", {
+        templateUrl : "addforum.html"        
     });
     $locationProvider.html5Mode({
     	 	  requireBase: false

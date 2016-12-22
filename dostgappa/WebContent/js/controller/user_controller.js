@@ -51,13 +51,15 @@ angular
 								UserService
 										.loginUser(usercred)
 										.then(
-												function(response) {
-													$window
-															.alert("UserName and Password did not match");
-												},
-												function(errResponse) {
-													var url = "http://localhost:9050/dostgappa/#/dghome";
+												function(response)
+												{
+													var url = "http://localhost:9050/dostgappa/#/blog";
 													$window.location.href = url;
+												},
+												function(errResponse)
+												{
+													$window
+													.alert("UserName and Password did not match");
 												});
 							}
 							function createUser(user) {

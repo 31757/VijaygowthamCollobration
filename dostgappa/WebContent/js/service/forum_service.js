@@ -1,15 +1,18 @@
 'use strict';
 
-angular.module('myApp').factory('Forumvice',
+angular.module('myApp').factory('ForumService',
 		[ '$http', '$q', function($http, $q) {
 
-			var REST_SERVICE_URI = 'http://localhost:9050/vanuchatserver/fourm';
+			var REST_SERVICE_URI = 'http://localhost:9050/vanuchat/fourm';
+			
 
 			var factory = {
 				fetchAllForum : fetchAllForum,
 				createForum : createForum,
 				updateForum : updateForum,
-
+				
+		
+				
 			};
 			return factory;
 			function fetchAllForum() {
@@ -34,7 +37,7 @@ angular.module('myApp').factory('Forumvice',
 			}
 			function updateForum(Forum, id) {
 				var deferred = $q.defer();
-				$http.put(REST_SERVICE_URI + id, Blog).then(function(response) {
+				$http.put(REST_SERVICE_URI + id, Forum).then(function(response) {
 					deferred.resolve(response.data);
 				}, function(errResponse) {
 					console.error('Error while updating Forum');
@@ -42,7 +45,7 @@ angular.module('myApp').factory('Forumvice',
 				});
 				return deferred.promise;
 			}
-			function postblogComments(Forum, id) {
+			function postforumComments(Forum, id) {
 				var deferred = $q.defer();
 				$http.put(REST_SERVICE_URI + id, Forum).then(function(response) {
 					deferred.resolve(response.data);
@@ -52,4 +55,6 @@ angular.module('myApp').factory('Forumvice',
 				});
 				return deferred.promise;
 			}
+			
+			
 		} ]);

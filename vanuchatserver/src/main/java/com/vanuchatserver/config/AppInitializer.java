@@ -1,5 +1,10 @@
 package com.vanuchatserver.config;
 
+import java.nio.charset.StandardCharsets;
+
+import javax.servlet.Filter;
+
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -25,6 +30,11 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	}
 	
 
-	
+	 @Override
+	  protected Filter[] getServletFilters() {
+	    CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+	    characterEncodingFilter.setEncoding(StandardCharsets.UTF_8.name());
+	    return new Filter[] { characterEncodingFilter };
+	  }
 
 }

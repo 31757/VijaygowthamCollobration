@@ -14,6 +14,8 @@ public interface ForumService
 	void deleteById(int id);
 	void postComment(ForumComments comments);
 	List<ForumComments> showcomment(int id);
+	void postRating(ForumRating rating);
+	List<ForumRating> showrating(int id);
 	
 	
 

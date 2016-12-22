@@ -8,14 +8,14 @@
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="Sucks"/>
+			<item value="rating.js"/>
+			<item value="comment"/>
+			<item value="servlet"/>
+			<item value="awesome"/>
 			<item value="blog"/>
-			<item value="header"/>
-			<item value="user"/>
-			<item value="User"/>
-			<item value="Blog"/>
-			<item value="kola"/>
-			<item value="register"/>
-			<item value="yes"/>
+			<item value="enter your name"/>
+			<item value="fourm"/>
 		</list>
 		<list key="replacehistory">
 			<item value="forum"/>

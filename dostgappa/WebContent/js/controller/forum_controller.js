@@ -10,31 +10,51 @@ angular
 						'$location',
 						'$window',
 						function($scope, ForumService, $location, $window) {
+							var fr;
+							$scope.firstRate = 0;
+							$scope.secondRate = 3;
+							$scope.readOnly = true;
+							$scope.onItemRating = function(rating) {
+								alert('On Rating: ' + rating);
+							};
+
 							var self = this;
 							self.forum = {
 								forumid : '',
-								userid : '',
-								forumtitle : '',
-								forumpostcontent : '',
-								tags : '',
+								forumtopic : '',
+								forumsubtopic : '',
 								date : ''
 							};
+
+							self.forum1 = {
+								forumid : '',
+								forumtopic : '',
+								forumsubtopic : '',
+								date : ''
+							};
+
 							self.forumcomm = {
 								forumcommentid : '',
 								forumid : '',
 								username : '',
 								comments : ''
 							};
+							
+
 							self.forums = [];
+							self.forum1 = [];
 							self.forumcomm = [];
+							
 
 							self.submit = submit;
+							
 							self.edit = edit;
 							self.remove = remove;
 							self.reset = reset;
 							self.login = login;
 
 							fetchAllForum();
+							
 
 							function fetchAllForum() {
 								ForumService
@@ -45,7 +65,7 @@ angular
 												},
 												function(errResponse) {
 													console
-															.error('Error while fetching Forums');
+															.error('Error while fetching Blogs');
 												});
 							}
 
@@ -77,7 +97,7 @@ angular
 							}
 
 							function deleteForum(id) {
-								forumService
+								ForumService
 										.deleteForum(id)
 										.then(
 												fetchAllForum,
@@ -87,11 +107,27 @@ angular
 												});
 							}
 
+							function fetchOneForum(id) {
+								ForumService.fetchOneForum(id).then(
+										function(d) {
+											self.forum1 = d;
+											console.log(self.forum1);
+										}, function(errResponse) {
+											// console.error('Error while
+											// fetching Blogs');
+										});
+							}
+							
+							
+
+							
 							function submit() {
 								createForum(self.forum);
+								
 
 							}
 
+							
 							function login() {
 								loginforum(self.forumcomm);
 
@@ -101,7 +137,8 @@ angular
 								console.log('id to be edited', id);
 								for (var i = 0; i < self.forum.length; i++) {
 									if (self.forum[i].id === id) {
-										self.forum = angular.copy(self.forum[i]);
+										self.forum = angular
+												.copy(self.forum[i]);
 										break;
 									}
 								}
@@ -115,15 +152,15 @@ angular
 									// there.
 									reset();
 								}
-								deleteforum(id);
+								deleteForum(id);
 							}
 
 							function reset() {
 								self.forum = {
 									forumid : null,
 									username : '',
-									forumtitle : '',
-									forumpostcontent : '',
+									forumtopic : '',
+									forumsubtopic : '',
 									tags : '',
 									Dateofcreation : ''
 								};

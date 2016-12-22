@@ -1,17 +1,23 @@
-'use strict';
+  'use strict';
 
 angular.module('myApp').factory('BlogService',
 		[ '$http', '$q', function($http, $q) {
-
-			var REST_SERVICE_URI = 'http://localhost:9050/vanuchatserver/blog';
-
+						var REST_SERVICE_URI = 'http://localhost:9050/vanuchat/blog';
+			var REST_SERVICE_URI1 = 'http://localhost:9050/vanuchat/blogcomment';
+			
+			
 			var factory = {
 				fetchAllBlog : fetchAllBlog,
 				createBlog : createBlog,
 				updateBlog : updateBlog,
+				fetchOneBlog:fetchOneBlog,
+				fetchAllBlogComments:fetchAllBlogComments,
+				postblogComments:postblogComments,
+				
 
 			};
 			return factory;
+			
 			function fetchAllBlog() {
 				var deferred = $q.defer();
 				$http.get(REST_SERVICE_URI).then(function(response) {
@@ -22,6 +28,18 @@ angular.module('myApp').factory('BlogService',
 				});
 				return deferred.promise;
 			}
+
+			function fetchOneBlog(id) {
+				var deferred = $q.defer();
+				$http.get(REST_SERVICE_URI+"/"+id).then(function(response) {
+					deferred.resolve(response.data);
+				}, function(errResponse) {
+					//console.error('Error while fetching Blogs');
+					deferred.reject(errResponse);
+				});
+				return deferred.promise;
+			}
+			
 			function createBlog(Blog) {
 				var deferred = $q.defer();
 				$http.post(REST_SERVICE_URI, Blog).then(function(response) {
@@ -31,8 +49,9 @@ angular.module('myApp').factory('BlogService',
 					deferred.reject(errResponse);
 				});
 				return deferred.promise;
+				
 			}
-			function updateBlog(Blog, id) {
+				function updateBlog(Blog, id) {
 				var deferred = $q.defer();
 				$http.put(REST_SERVICE_URI + id, Blog).then(function(response) {
 					deferred.resolve(response.data);
@@ -42,9 +61,21 @@ angular.module('myApp').factory('BlogService',
 				});
 				return deferred.promise;
 			}
-			function postblogComments(Blog, id) {
+			
+			function fetchAllBlogComments(id) {
 				var deferred = $q.defer();
-				$http.put(REST_SERVICE_URI + id, Blog).then(function(response) {
+				$http.get(REST_SERVICE_URI1+"/"+id).then(function(response) {
+					deferred.resolve(response.data);
+				}, function(errResponse) {
+					console.error('Error while fetching Blogs');
+					deferred.reject(errResponse);
+				});
+				return deferred.promise;
+			}
+			
+			function postblogComments(bcm, id) {
+				var deferred = $q.defer();
+				$http.post(REST_SERVICE_URI1+"/"+id+"/"+ bcm).then(function(response) {
 					deferred.resolve(response.data);
 				}, function(errResponse) {
 					console.error('Error while updating Blog');

@@ -15,6 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.vanuchatserver.model.Forum;
 import com.vanuchatserver.model.ForumComments;
+import com.vanuchatserver.model.ForumRating;
 import com.vanuchatserver.service.ForumService;
 
 
@@ -111,5 +112,35 @@ public class ForumController
 	            return new ResponseEntity<List<ForumComments>>(HttpStatus.NOT_FOUND);//You many decide to return HttpStatus.NOT_FOUND
 	        }
 	        return new ResponseEntity<List<ForumComments>>(comment, HttpStatus.OK);
+	    }
+	    
+	    //------------------- rate a Fourm --------------------------------------------------------
+	    @RequestMapping(value = "/fourmrate/{id}", method = RequestMethod.POST)
+	    public ResponseEntity<Forum> rateBlog(@PathVariable("id") int id, @RequestBody ForumRating  rating)
+	    {
+	    	Forum existingpost = fs.findById(id);
+	        if (existingpost == null) 
+	        {
+	            System.out.println("Not been rated");
+	            return new ResponseEntity<Forum>(HttpStatus.NOT_FOUND);
+	        }
+	        else
+	        {
+	        	rating.setForumid(existingpost.getForumid());
+	        	fs.postRating(rating);
+	        	return new ResponseEntity<Forum>(HttpStatus.OK);
+	        }
+	    }
+	    
+	  //-------------------Retrieve All ratings--------------------------------------------------------
+	    @RequestMapping(value = "/fourmrate/{id}", method = RequestMethod.GET)
+	    public ResponseEntity<List<ForumRating>> listAllRating(@PathVariable("id") int id) 
+	    {
+	        List<ForumRating> rating = fs.showrating(id);
+	        if(rating.isEmpty())
+	        {
+	            return new ResponseEntity<List<ForumRating>>(HttpStatus.NOT_FOUND);//You many decide to return HttpStatus.NOT_FOUND
+	        }
+	        return new ResponseEntity<List<ForumRating>>(rating, HttpStatus.OK);
 	    }
 }

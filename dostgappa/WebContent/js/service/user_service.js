@@ -2,9 +2,9 @@
 
 angular.module('myApp').factory('UserService', ['$http', '$q',function($http, $q){
 
-    var REST_SERVICE_URI = 'http://localhost:9050/vanuchatserver/user';
-    var REST_SERVICE_URI1 = 'http://localhost:9050/vanuchatserver/userlogin';
-    
+    var REST_SERVICE_URI = 'http://localhost:9050/vanuchat/user';
+    var REST_SERVICE_URI1 = 'http://localhost:9050/vanuchat/userlogin';
+       
     var factory = {
         fetchAllUsers: fetchAllUsers,
         createUser: createUser,

@@ -5,12 +5,13 @@ import javax.persistence.*;
 @Entity
 public class Forum
 {
-	@Id
-	int forumid;
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	int forumid;	
 	@Column
 	String forumtopic;
 	@Column
 	String forumsubtopic;
+	
 	
 	public int getForumid() {
 		return forumid;

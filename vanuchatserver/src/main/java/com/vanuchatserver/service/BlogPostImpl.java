@@ -49,6 +49,7 @@ public class BlogPostImpl implements BlogPostService {
 		Transaction tx=s.getTransaction();
 		tx.begin();
 		Blog c=(Blog)s.get(Blog.class,id);
+		System.out.println(c);
 		tx.commit();
 		s.flush();
 		s.clear();

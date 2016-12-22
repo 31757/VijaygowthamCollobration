@@ -104,6 +104,33 @@ public class ForumImpl implements ForumService
 		s.close();
 		return showuser;
 	}
+
+	@Override
+	public void postRating(ForumRating rating) {
+		// TODO Auto-generated method stub
+		Session s=sessionFactory.openSession();
+		Transaction tx=s.getTransaction();
+		tx.begin();
+		s.save(rating);
+		tx.commit();
+		s.flush();
+		s.clear();
+		s.close();
+	}
+
+	@Override
+	public List<ForumRating> showrating(int id) {
+		// TODO Auto-generated method stub
+		Session s=sessionFactory.openSession();
+		Transaction tx=s.getTransaction();
+		tx.begin();
+		List<ForumRating> showuser = s.createQuery("FROM ForumRating where fourmid="+id).list();
+		tx.commit();
+		s.flush();
+		s.clear();
+		s.close();
+		return showuser;
+	}
 	
 
 }
